@@ -19,22 +19,31 @@ module "sharedservices" {
   source = "./shared_services"
 }
 
+# Production environment
 module "web_nodes_production" {
   source     = "./web_nodes"
   nodes      = "${var.webnodes}"
-  subnet     = "${module.sharedservices.subnet1_id}"
+  subnet     = "${module.sharedservices.websubnet}"
   group_name = "t-web-prod"
 }
 
+module "db_production" {
+  source           = "./database"
+  standardtiersize = "S1"
+  group_name       = "t-db-prod"
+}
+
+# Test environment
 module "web_nodes_test" {
   source     = "./web_nodes"
   nodes      = "1"
-  subnet     = "${module.sharedservices.subnet1_id}"
+  subnet     = "${module.sharedservices.testsubnet}"
   group_name = "t-web-test"
 }
 
-# Resource group for database
-resource "azurerm_resource_group" "db" {
-  name     = "t-db"
-  location = "West Europe"
+module "db_test" {
+  source           = "./database"
+  standardtiersize = "S0"
+  group_name       = "t-db-test"
 }
+

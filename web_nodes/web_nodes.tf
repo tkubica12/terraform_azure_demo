@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "web" {
 
 # Web layer NIC
 resource "azurerm_network_interface" "web" {
-  name                = "testnic${count.index}"
+  name                = "webnic${count.index}"
   location            = "West Europe"
   resource_group_name = "${azurerm_resource_group.web.name}"
   count               = "${var.nodes}"
