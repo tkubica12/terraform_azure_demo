@@ -19,13 +19,6 @@ resource "azurerm_subnet" "websubnet" {
   address_prefix       = "10.0.1.0/24"
 }
 
-resource "azurerm_subnet" "dbsubnet" {
-  name                 = "dbsubnet"
-  resource_group_name  = "${azurerm_resource_group.sharedservices.name}"
-  virtual_network_name = "${azurerm_virtual_network.network.name}"
-  address_prefix       = "10.0.2.0/24"
-}
-
 resource "azurerm_subnet" "testsubnet" {
   name                 = "testsubnet"
   resource_group_name  = "${azurerm_resource_group.sharedservices.name}"
@@ -35,10 +28,6 @@ resource "azurerm_subnet" "testsubnet" {
 
 output "websubnet" {
   value = "${azurerm_subnet.websubnet.id}"
-}
-
-output "dbsubnet" {
-  value = "${azurerm_subnet.dbsubnet.id}"
 }
 
 output "testsubnet" {

@@ -1,6 +1,12 @@
 variable "webnodes" {
   default = 3
 }
+variable "mastercount" {
+  default = 1
+}
+variable "agentcount" {
+  default = 3
+}
 
 variable "subscription_id" {}
 variable "client_id" {}
@@ -15,6 +21,7 @@ provider "azurerm" {
   tenant_id       = "${var.tenant_id}"
 }
 
+# Network and other shared services
 module "sharedservices" {
   source = "./shared_services"
 }
@@ -25,6 +32,15 @@ module "web_nodes_production" {
   nodes      = "${var.webnodes}"
   subnet     = "${module.sharedservices.websubnet}"
   group_name = "t-web-prod"
+}
+
+module "app_production" {
+  source           = "./app_kubernetes"
+  mastercount      = "${var.mastercount}"
+  agentcount       = "${var.agentcount}"
+  group_name       = "t-app-prod"
+  client_id        = "${var.client_id}"
+  client_secret    = "${var.client_secret}"
 }
 
 module "db_production" {
@@ -41,9 +57,17 @@ module "web_nodes_test" {
   group_name = "t-web-test"
 }
 
+module "app_test" {
+  source           = "./app_kubernetes"
+  mastercount      = 1
+  agentcount       = 1
+  group_name       = "t-app-test"
+  client_id        = "${var.client_id}"
+  client_secret    = "${var.client_secret}"
+}
+
 module "db_test" {
   source           = "./database"
   standardtiersize = "S0"
   group_name       = "t-db-test"
 }
-

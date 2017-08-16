@@ -12,15 +12,15 @@ resource "azurerm_resource_group" "db" {
 
 # Random generator
 resource "random_id" "dbserver" {
-  byte_length = 8
+  byte_length = 4
 }
 resource "random_id" "db" {
-  byte_length = 8
+  byte_length = 4
 }
 
 # Azure Database Server
 resource "azurerm_sql_server" "db" {
-  name                         = "${random_id.dbserver.hex}"
+  name                         = "sql-${random_id.dbserver.hex}"
   resource_group_name          = "${azurerm_resource_group.db.name}"
   location                     = "West Europe"
   version                      = "12.0"
@@ -30,7 +30,7 @@ resource "azurerm_sql_server" "db" {
 
 # Azure Database
 resource "azurerm_sql_database" "db" {
-  name                             = "${random_id.db.hex}"
+  name                             = "sqldb-${random_id.db.hex}"
   resource_group_name              = "${azurerm_resource_group.db.name}"
   location                         = "West Europe"
   server_name                      = "${azurerm_sql_server.db.name}"
