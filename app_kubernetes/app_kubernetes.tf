@@ -32,7 +32,7 @@ resource "azurerm_resource_group" "app" {
 
 # Storage account for registry
 resource "azurerm_storage_account" "app" {
-  name                = "storage-${random_id.storage.hex}"
+  name                = "storage${random_id.storage.hex}"
   resource_group_name = "${azurerm_resource_group.app.name}"
   location            = "${azurerm_resource_group.app.location}"
   account_type        = "Standard_LRS"
@@ -40,7 +40,7 @@ resource "azurerm_storage_account" "app" {
 
 # Azure Container Registry
 resource "azurerm_container_registry" "app" {
-  name                = "contreg-${random_id.registry.hex}"
+  name                = "contreg${random_id.registry.hex}"
   resource_group_name = "${azurerm_resource_group.app.name}"
   location            = "${azurerm_resource_group.app.location}"
   admin_enabled       = true
