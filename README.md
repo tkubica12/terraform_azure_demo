@@ -1,5 +1,9 @@
 # Terraform with Azure demo
 
+Terraform is universal infrastructure as code open source tool developed by Hashicorp. It is very declarative with easy to read language structure and fully desired state including lifecycle management (provisioning, rolling out changes, destroying). Terraform supports all major cloud providers including Azure and can provide level of abstraction and reusability with multiple environments as opposed to vendor specific solutions (Azure ARM, AWS CloudFormation).
+
+Terraform provides paid version (Enterprise) on top of this open source project that adds central state management, roles and collaboration, enterprise integration, version control integration and GUI.
+
 ## Install Terraform
 
 sudo apt-get install unzip
