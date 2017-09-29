@@ -6,10 +6,12 @@ Terraform provides paid version (Enterprise) on top of this open source project 
 
 ## Install Terraform
 
+```
 sudo apt-get install unzip
 wget https://releases.hashicorp.com/terraform/0.10.0/terraform_0.10.0_linux_amd64.zip
 unzip terraform_0.10.0_linux_amd64.zip
 sudo mv ./terraform /usr/bin
+```
 
 ## Use
 Jump into directory
