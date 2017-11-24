@@ -25,6 +25,12 @@ client_secret   = "xxx"
 tenant_id       = "xxx"
 ```
 
+When running Terraform for first time make it load all our modules.
+
+```
+terraform get
+```
+
 Execute
 
 ```
